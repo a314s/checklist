@@ -60,6 +60,13 @@ function toggleExcelViewer() {
         excelViewer.style.display = 'block';
         excelViewer.style.height = '400px';
         document.querySelector('.doc-viewers').style.height = '500px';
+        // Hide all sheets first
+        document.querySelectorAll('.sheet').forEach(sheet => sheet.classList.remove('active'));
+        // Show current sheet
+        const currentSheet = document.getElementById(`sheet${currentStep}`);
+        if (currentSheet) {
+            currentSheet.classList.add('active');
+        }
         updateExcelView();
     } else {
         excelViewer.style.display = 'none';
@@ -149,8 +156,14 @@ async function loadSheetData(sheetNumber) {
 }
 
 function updateExcelTable(sheetNumber, measurements) {
+    // Hide all sheets first
+    document.querySelectorAll('.sheet').forEach(sheet => sheet.classList.remove('active'));
+    
     const currentSheet = document.getElementById(`sheet${sheetNumber}`);
     if (!currentSheet) return;
+
+    // Show current sheet
+    currentSheet.classList.add('active');
 
     const tbody = currentSheet.querySelector('tbody');
     tbody.innerHTML = ''; // Clear existing rows
