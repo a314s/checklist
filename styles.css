@@ -1,0 +1,287 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 200px 1fr 300px;
+    gap: 20px;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Steps Column */
+.steps-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.step-btn {
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e74c3c;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.step-btn:hover {
+    opacity: 0.9;
+}
+
+.step-btn.completed {
+    background-color: #2ecc71;
+}
+
+.step-btn.current {
+    background-color: #f1c40f;
+    transform: scale(1.05);
+}
+
+/* Main Content */
+.main-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 40px);
+    overflow: hidden;
+}
+
+h1 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+/* Progress Bar */
+.progress-container {
+    background-color: #ecf0f1;
+    border-radius: 5px;
+    margin: 20px 0;
+    height: 10px;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #3498db;
+    border-radius: 5px;
+    transition: width 0.3s ease;
+}
+
+/* Action Window */
+.action-window {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 20px;
+    overflow: hidden;
+    flex: 1;
+}
+
+.required-actions {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e0e0e0;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+    background-color: #3498db;
+    color: white;
+}
+
+.tab-content {
+    flex: 1;
+    overflow: hidden;
+}
+
+.tab-pane {
+    display: none;
+    height: 100%;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+/* Video Player */
+.video-player {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.video-player video {
+    max-height: 100%;
+    width: 100%;
+}
+
+/* Text Instructions */
+.required-actions ul {
+    padding-left: 20px;
+}
+
+.required-actions li {
+    margin: 10px 0;
+    color: #2c3e50;
+}
+
+/* Data Input */
+.data-input {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.input-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+label {
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+input {
+    padding: 8px;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+/* Document Viewers */
+.doc-viewers {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: calc(100vh - 40px);
+    overflow: hidden;
+}
+
+.viewer-btn {
+    padding: 12px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.viewer-btn:hover {
+    background-color: #2980b9;
+}
+
+/* Excel Viewer */
+.excel-viewer {
+    display: none;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: auto;
+    padding: 15px;
+    flex: 1;
+}
+
+.excel-data {
+    width: 100%;
+}
+
+.sheet {
+    display: none;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.sheet.active {
+    display: block;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 14px;
+    background: white;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f5f5f5;
+    font-weight: 600;
+    color: #333;
+    position: sticky;
+    top: 0;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+    background-color: #f0f0f0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .container {
+        grid-template-columns: 150px 1fr 250px;
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        grid-template-columns: 120px 1fr 200px;
+    }
+}
