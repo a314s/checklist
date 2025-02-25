@@ -87,6 +87,7 @@ h1 {
     flex: 1;
 }
 
+/* Required Actions */
 .required-actions {
     background-color: #f8f9fa;
     padding: 20px;
@@ -94,6 +95,39 @@ h1 {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+}
+
+.actions-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.new-entry-btn {
+    padding: 8px 15px;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.new-entry-btn:hover {
+    background-color: #219653;
+}
+
+/* Input validation */
+.input-error {
+    animation: flash-red 0.5s 3;
+    border-color: #e74c3c !important;
+}
+
+@keyframes flash-red {
+    0%, 100% { border-color: #e74c3c; }
+    50% { border-color: #bdc3c7; }
 }
 
 /* Tabs */
@@ -165,6 +199,14 @@ h1 {
     border-radius: 5px;
 }
 
+.step-fields {
+    display: none;
+}
+
+.step-fields.active {
+    display: block;
+}
+
 .input-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -182,14 +224,14 @@ label {
     color: #2c3e50;
 }
 
-input {
+input, select {
     padding: 8px;
     border: 1px solid #bdc3c7;
     border-radius: 4px;
     font-size: 14px;
 }
 
-input:focus {
+input:focus, select:focus {
     outline: none;
     border-color: #3498db;
 }

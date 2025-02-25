@@ -10,9 +10,9 @@
     <div class="container">
         <!-- Left Column - Steps -->
         <div class="steps-column">
-            <button class="step-btn current">Step 1</button>
-            <button class="step-btn">Step 2</button>
-            <button class="step-btn">Step 3</button>
+            <button class="step-btn current">Initialization</button>
+            <button class="step-btn">Identifiers</button>
+            <button class="step-btn">Results</button>
             <button class="step-btn">Step 4</button>
             <button class="step-btn">Step 5</button>
         </div>
@@ -29,7 +29,10 @@
             <!-- Action Window -->
             <div class="action-window">
                 <div class="required-actions">
-                    <h2>Required Actions</h2>
+                    <div class="actions-header">
+                        <h2>Required Actions</h2>
+                        <button id="newEntryBtn" class="new-entry-btn">New Entry</button>
+                    </div>
                     <div class="tabs">
                         <button class="tab-btn" data-tab="video">Video Instructions</button>
                         <button class="tab-btn active" data-tab="text">Text Instructions</button>
@@ -54,22 +57,100 @@
                 </div>
                 <div class="data-input">
                     <h2>Required Data</h2>
-                    <div class="input-grid">
-                        <div class="input-group">
-                            <label for="top">Top:</label>
-                            <input type="text" id="top" name="top">
+                    <div id="step1-fields" class="step-fields active">
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label for="name">Name:</label>
+                                <input type="text" id="name" name="name">
+                            </div>
+                            <div class="input-group">
+                                <label for="date">Date:</label>
+                                <input type="date" id="date" name="date">
+                            </div>
                         </div>
-                        <div class="input-group">
-                            <label for="bottom">Bottom:</label>
-                            <input type="text" id="bottom" name="bottom">
+                    </div>
+                    <div id="step2-fields" class="step-fields">
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label for="partOrder">Part Order #:</label>
+                                <input type="text" id="partOrder" name="partOrder">
+                            </div>
+                            <div class="input-group">
+                                <label for="assemblyId">Assembly ID#:</label>
+                                <input type="text" id="assemblyId" name="assemblyId">
+                            </div>
+                            <div class="input-group">
+                                <label for="testEquipmentId">Test Equipment ID#:</label>
+                                <input type="text" id="testEquipmentId" name="testEquipmentId">
+                            </div>
+                            <div class="input-group">
+                                <label for="buildType">First build or Repair:</label>
+                                <select id="buildType" name="buildType">
+                                    <option value="">Select...</option>
+                                    <option value="First Build">First Build</option>
+                                    <option value="Repair">Repair</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="input-group">
-                            <label for="left">Left:</label>
-                            <input type="text" id="left" name="left">
+                    </div>
+                    <div id="step3-fields" class="step-fields">
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label for="testResultTop">Test Result top:</label>
+                                <input type="text" id="testResultTop" name="testResultTop">
+                            </div>
+                            <div class="input-group">
+                                <label for="testResultMiddle">Test Result Middle:</label>
+                                <input type="text" id="testResultMiddle" name="testResultMiddle">
+                            </div>
+                            <div class="input-group">
+                                <label for="testResultBottom">Test Result Bottom:</label>
+                                <input type="text" id="testResultBottom" name="testResultBottom">
+                            </div>
+                            <div class="input-group">
+                                <label for="nextCalibrationDate">Next Calibration Date:</label>
+                                <input type="date" id="nextCalibrationDate" name="nextCalibrationDate">
+                            </div>
                         </div>
-                        <div class="input-group">
-                            <label for="right">Right:</label>
-                            <input type="text" id="right" name="right">
+                    </div>
+                    <div id="step4-fields" class="step-fields">
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label for="top">Top:</label>
+                                <input type="text" id="top" name="top">
+                            </div>
+                            <div class="input-group">
+                                <label for="bottom">Bottom:</label>
+                                <input type="text" id="bottom" name="bottom">
+                            </div>
+                            <div class="input-group">
+                                <label for="left">Left:</label>
+                                <input type="text" id="left" name="left">
+                            </div>
+                            <div class="input-group">
+                                <label for="right">Right:</label>
+                                <input type="text" id="right" name="right">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="step5-fields" class="step-fields">
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label for="top">Top:</label>
+                                <input type="text" id="top" name="top">
+                            </div>
+                            <div class="input-group">
+                                <label for="bottom">Bottom:</label>
+                                <input type="text" id="bottom" name="bottom">
+                            </div>
+                            <div class="input-group">
+                                <label for="left">Left:</label>
+                                <input type="text" id="left" name="left">
+                            </div>
+                            <div class="input-group">
+                                <label for="right">Right:</label>
+                                <input type="text" id="right" name="right">
+                            </div>
                         </div>
                     </div>
                 </div>
