@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div id="overlay" class="overlay"></div>
     <div class="container">
         <!-- Left Column - Steps -->
         <div class="steps-column">
@@ -29,6 +30,9 @@
             <!-- Action Window -->
             <div class="action-window">
                 <div class="required-actions">
+                    <button class="pop-out-btn" data-section="required-actions">
+                        <i class="expand-icon">⤢</i> Expand
+                    </button>
                     <h2>Required Actions</h2>
                     <div class="tabs">
                         <button class="tab-btn" data-tab="video">Video Instructions</button>
@@ -55,7 +59,12 @@
                 <div class="data-input">
                     <div class="data-header">
                         <h2>Required Data</h2>
-                        <button id="newEntryBtn" class="new-entry-btn">New Entry</button>
+                        <div class="button-group">
+                            <button id="newEntryBtn" class="new-entry-btn">New Entry</button>
+                            <button class="pop-out-btn" data-section="data-input">
+                                <i class="expand-icon">⤢</i> Expand
+                            </button>
+                        </div>
                     </div>
                     <div id="step1-fields" class="step-fields active">
                         <div class="input-grid">
@@ -153,6 +162,8 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Bottom spacer -->
+                    <div class="bottom-spacer"></div>
                 </div>
             </div>
         </div>
@@ -163,6 +174,9 @@
             <button class="viewer-btn" onclick="openPDF('document2.pdf')">View Instructions PDF</button>
             <button class="viewer-btn" onclick="toggleExcelViewer()">View Excel Data</button>
             <div id="excelViewer" class="excel-viewer">
+                <button class="pop-out-btn" data-section="excel-viewer">
+                    <i class="expand-icon">⤢</i> Expand
+                </button>
                 <div class="excel-data">
                     <div id="sheet1" class="sheet">
                         <table>

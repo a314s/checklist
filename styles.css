@@ -50,12 +50,13 @@ body {
 .main-content {
     background: white;
     padding: 20px;
+    padding-bottom: 40px; /* Add extra padding at the bottom */
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
     height: calc(100vh - 40px);
-    overflow: hidden;
+    overflow: auto; /* Changed from hidden to auto to allow scrolling */
 }
 
 h1 {
@@ -82,9 +83,10 @@ h1 {
 .action-window {
     display: grid;
     grid-template-rows: 1fr auto;
-    gap: 20px;
-    overflow: hidden;
+    gap: 30px; /* Increased gap between sections */
+    overflow: auto; /* Changed from hidden to auto to allow scrolling */
     flex: 1;
+    padding-bottom: 20px; /* Added padding at the bottom */
 }
 
 /* Required Actions */
@@ -95,6 +97,7 @@ h1 {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    position: relative; /* For the pop-out button */
 }
 
 .actions-header {
@@ -105,7 +108,7 @@ h1 {
 }
 
 .new-entry-btn {
-    padding: 8px 15px;
+    padding: 10px 15px;
     background-color: #27ae60;
     color: white;
     border: none;
@@ -113,6 +116,10 @@ h1 {
     cursor: pointer;
     font-weight: 500;
     transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    height: 36px;
 }
 
 .new-entry-btn:hover {
@@ -197,6 +204,8 @@ h1 {
     background-color: #f8f9fa;
     padding: 20px;
     border-radius: 5px;
+    position: relative; /* For the pop-out button */
+    margin-bottom: 20px; /* Add margin at the bottom */
 }
 
 .data-header {
@@ -204,6 +213,21 @@ h1 {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
+    position: relative;
+    height: 36px;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Adjust pop-out button in data-input section */
+.data-input .pop-out-btn {
+    position: relative;
+    top: auto;
+    right: auto;
 }
 
 .step-fields {
@@ -275,6 +299,120 @@ input:focus, select:focus {
     overflow: auto;
     padding: 15px;
     flex: 1;
+    position: relative; /* For the pop-out button */
+}
+
+/* Pop-out functionality */
+.pop-out-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 36px;
+}
+
+.pop-out-btn:hover {
+    background-color: #2980b9;
+}
+
+.pop-out-btn i {
+    font-size: 14px;
+}
+
+.popped-out {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 1000 !important;
+    width: 80% !important;
+    height: 80% !important;
+    max-width: 1200px !important;
+    max-height: 800px !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3) !important;
+    border: 1px solid #ddd !important;
+    overflow: auto !important;
+    background-color: white !important;
+    padding: 25px !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* Ensure content is visible in popped-out state */
+.popped-out .tab-content,
+.popped-out .excel-data,
+.popped-out .input-grid {
+    flex: 1 !important;
+    overflow: auto !important;
+}
+
+.popped-out.required-actions .tab-pane.active {
+    height: auto !important;
+    max-height: calc(80vh - 100px) !important;
+    overflow: auto !important;
+}
+
+.popped-out.excel-viewer {
+    padding-top: 40px !important;
+}
+
+.popped-out .pop-out-btn {
+    position: absolute !important;
+    top: 10px !important;
+    right: 10px !important;
+}
+
+/* Fix button alignment in popped-out data-input section */
+.popped-out.data-input .button-group {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1001;
+    display: flex;
+    gap: 10px; /* Consistent gap between buttons */
+    align-items: center;
+}
+
+.popped-out.data-input .data-header {
+    margin-top: 50px; /* Add space for the buttons */
+    position: relative;
+}
+
+/* Remove individual button margin since we're using gap */
+.popped-out.data-input .new-entry-btn {
+    margin-right: 0;
+}
+
+/* Make the redock button match the new entry button style in popped out state */
+.popped-out.data-input .pop-out-btn {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+}
+
+.overlay.active {
+    display: block;
 }
 
 .excel-data {
@@ -320,6 +458,15 @@ tbody tr:nth-child(even) {
 
 tbody tr:hover {
     background-color: #f0f0f0;
+}
+
+/* Bottom spacer */
+.bottom-spacer {
+    height: 100px;
+    width: 100%;
+    min-height: 100px; /* Ensure minimum height */
+    /* Removed background-color */
+    margin-top: 20px; /* Add some space above */
 }
 
 /* Responsive adjustments */

@@ -588,8 +588,50 @@ function validateStep() {
     updateProgress(); // Update progress bar color
 }
 
+// Pop-out functionality
+function setupPopOutButtons() {
+    const overlay = document.getElementById('overlay');
+    const popOutButtons = document.querySelectorAll('.pop-out-btn');
+    
+    popOutButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const sectionType = this.getAttribute('data-section');
+            const section = this.closest(`.${sectionType}`);
+            const isPopped = section.classList.contains('popped-out');
+            
+            if (isPopped) {
+                // Redock the section
+                section.classList.remove('popped-out');
+                overlay.classList.remove('active');
+                this.innerHTML = '<i class="expand-icon">⤢</i> Expand';
+            } else {
+                // Pop out the section
+                section.classList.add('popped-out');
+                overlay.classList.add('active');
+                this.innerHTML = '<i class="expand-icon">⤢</i> Redock';
+            }
+        });
+    });
+    
+    // Close popped out section when clicking on overlay
+    overlay.addEventListener('click', function() {
+        const poppedSection = document.querySelector('.popped-out');
+        if (poppedSection) {
+            poppedSection.classList.remove('popped-out');
+            overlay.classList.remove('active');
+            const button = poppedSection.querySelector('.pop-out-btn');
+            if (button) {
+                button.innerHTML = '<i class="expand-icon">⤢</i> Expand';
+            }
+        }
+    });
+}
+
 // Initialize Excel view and load data
 document.addEventListener('DOMContentLoaded', () => {
+    // Set up pop-out functionality
+    setupPopOutButtons();
+    
     // Set up New Entry button
     const newEntryBtn = document.getElementById('newEntryBtn');
     if (newEntryBtn) {
