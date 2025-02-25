@@ -199,6 +199,13 @@ h1 {
     border-radius: 5px;
 }
 
+.data-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
 .step-fields {
     display: none;
 }

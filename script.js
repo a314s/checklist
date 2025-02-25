@@ -147,27 +147,30 @@ async function saveToExcel() {
         };
 
         // Get name and date from step 1 (these are used in all sheets)
-        const nameValue = document.getElementById('name').value.trim();
-        const dateValue = document.getElementById('date').value;
+        const nameValue = document.getElementById('name')?.value.trim() || '';
+        const dateValue = document.getElementById('date')?.value || '';
         
-        if (!nameValue || !dateValue) {
-            return; // Don't save if name or date is missing
+        // Always include name and date if available, even if we're not on step 1
+        if (nameValue) {
+            measurement.name = nameValue;
         }
         
-        measurement.name = nameValue;
-        measurement.date = new Date(dateValue);
+        if (dateValue) {
+            measurement.date = new Date(dateValue);
+        }
 
         // Handle different fields based on current step
         switch(currentStep) {
             case 1: // Initialization
                 allInputsFilled = nameValue && dateValue;
+                // No specific measurements for step 1
                 break;
                 
             case 2: // Identifiers
-                const partOrderValue = document.getElementById('partOrder').value.trim();
-                const assemblyIdValue = document.getElementById('assemblyId').value.trim();
-                const testEquipmentIdValue = document.getElementById('testEquipmentId').value.trim();
-                const buildTypeValue = document.getElementById('buildType').value;
+                const partOrderValue = document.getElementById('partOrder')?.value.trim() || '';
+                const assemblyIdValue = document.getElementById('assemblyId')?.value.trim() || '';
+                const testEquipmentIdValue = document.getElementById('testEquipmentId')?.value.trim() || '';
+                const buildTypeValue = document.getElementById('buildType')?.value || '';
                 
                 if (!partOrderValue || !assemblyIdValue || !testEquipmentIdValue || !buildTypeValue) {
                     return; // Don't save if any value is missing
@@ -183,10 +186,10 @@ async function saveToExcel() {
                 break;
                 
             case 3: // Results
-                const testResultTopValue = document.getElementById('testResultTop').value.trim();
-                const testResultMiddleValue = document.getElementById('testResultMiddle').value.trim();
-                const testResultBottomValue = document.getElementById('testResultBottom').value.trim();
-                const nextCalibrationDateValue = document.getElementById('nextCalibrationDate').value;
+                const testResultTopValue = document.getElementById('testResultTop')?.value.trim() || '';
+                const testResultMiddleValue = document.getElementById('testResultMiddle')?.value.trim() || '';
+                const testResultBottomValue = document.getElementById('testResultBottom')?.value.trim() || '';
+                const nextCalibrationDateValue = document.getElementById('nextCalibrationDate')?.value || '';
                 
                 if (!testResultTopValue || !testResultMiddleValue || !testResultBottomValue || !nextCalibrationDateValue) {
                     return; // Don't save if any value is missing
@@ -203,10 +206,10 @@ async function saveToExcel() {
                 
             case 4:
             case 5:
-                const topValue = document.getElementById('top').value.trim();
-                const bottomValue = document.getElementById('bottom').value.trim();
-                const leftValue = document.getElementById('left').value.trim();
-                const rightValue = document.getElementById('right').value.trim();
+                const topValue = document.getElementById('top')?.value.trim() || '';
+                const bottomValue = document.getElementById('bottom')?.value.trim() || '';
+                const leftValue = document.getElementById('left')?.value.trim() || '';
+                const rightValue = document.getElementById('right')?.value.trim() || '';
                 
                 if (!topValue || !bottomValue || !leftValue || !rightValue) {
                     return; // Don't save if any value is missing
@@ -226,6 +229,8 @@ async function saveToExcel() {
             return; // Don't save if required fields aren't filled
         }
 
+        console.log('Sending measurement to server:', measurement);
+        
         const response = await fetch(`${API_URL}/measurements`, {
             method: 'POST',
             headers: {
@@ -244,8 +249,11 @@ async function saveToExcel() {
         // Refresh the view with new data
         await loadSheetData(currentStep);
         validateStep();
+        
+        return result; // Return the result for the New Entry button
     } catch (error) {
         showError('Failed to save measurement: ' + error.message);
+        throw error; // Re-throw for the New Entry button
     }
 }
 
@@ -426,12 +434,14 @@ function validateStep() {
     const currentStepFields = document.getElementById(`step${currentStep}-fields`);
     if (!currentStepFields) {
         currentStepBtn.classList.remove('completed');
+        updateProgress(); // Update progress bar color
         return;
     }
     
     const stepInputs = currentStepFields.querySelectorAll('input, select');
     allInputsFilled = Array.from(stepInputs).every(input => input.value.trim() !== '');
     
+    // If all inputs are filled, check if data is in the Excel view
     if (allInputsFilled && excelViewerActive) {
         const currentSheet = document.getElementById(`sheet${currentStep}`);
         if (currentSheet) {
@@ -472,13 +482,19 @@ function validateStep() {
                 
                 if (hasAllFields) {
                     currentStepBtn.classList.add('completed');
+                    updateProgress(); // Update progress bar color
                     return;
                 }
             }
         }
+    } else if (allInputsFilled) {
+        // If all inputs are filled but Excel viewer is not active,
+        // save the data to make sure it's in the database
+        saveToExcel().catch(err => console.error('Auto-save error:', err));
     }
     
     currentStepBtn.classList.remove('completed');
+    updateProgress(); // Update progress bar color
 }
 
 // Initialize Excel view and load data
